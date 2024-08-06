@@ -19,7 +19,7 @@ export class DCLogin{
     }
 
     async goto(){
-        await this.page.goto("/Login")
+        await this.page.goto("")
     }
 
 
