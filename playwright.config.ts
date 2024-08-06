@@ -36,17 +36,17 @@ export default defineConfig({
   projects: [
     {
       name: 'chromium',
-      use: { ...devices['Desktop Chrome'], baseURL: "https://admin.dc.local/Login", ignoreHTTPSErrors: true },
+      use: { ...devices['Desktop Chrome'], baseURL: "https://admin.drivers-check.de/Login", ignoreHTTPSErrors: true },
     },
 
     {
       name: 'firefox',
-      use: { ...devices['Desktop Firefox'], baseURL: "https://admin.dc.local/Login", ignoreHTTPSErrors: true  },
+      use: { ...devices['Desktop Firefox'], baseURL: "https://admin.drivers-check.de/Login", ignoreHTTPSErrors: true  },
     },
 
     {
       name: 'webkit',
-      use: { ...devices['Desktop Safari'], baseURL: "https://admin.dc.local/Login" , ignoreHTTPSErrors: true },
+      use: { ...devices['Desktop Safari'], baseURL: "https://admin.drivers-check.de/Login" , ignoreHTTPSErrors: true },
     },
 
     /* Test against mobile viewports. */
