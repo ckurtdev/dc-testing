@@ -4,7 +4,7 @@ import {DCHome} from '../pageObjectModels/dc-home'
 
 const credentials = {
     email: 'ckurt@drivers-check.de',
-    password: 'cx%@aARAz$8nUt2m^4BdqHdWaUjZ7J8u6'
+    password: 'Bananarama'
 };
 
 test.describe('Admin Monitor Login Tests', () => {
@@ -14,7 +14,6 @@ test.describe('Admin Monitor Login Tests', () => {
         await loginPage.goto()
         loginPage.page.waitForLoadState('domcontentloaded')
         await loginPage.login(email, password)
-        loginPage.page.waitForLoadState('load')
         
         // check if successfull
         const dashboardLocator: Locator =  page.getByRole('heading', { name: ' Dashboard DriversCheck GmbH' }).locator('small')
@@ -28,7 +27,7 @@ test.describe('Admin Monitor Login Tests', () => {
     });
     
     test('Unathorized Test', async ({ page }: {page: Page}) => {
-        await page.goto('https://admin.drivers-check.de/Organisations');
-        await expect(page).toHaveURL('https://admin.drivers-check.de/Login');
+        await page.goto('https://admin.dc.local/Organisations');
+        await expect(page).toHaveURL('https://admin.dc.local/Login');
     });
 });

@@ -8,13 +8,14 @@ const credentials = {
 };
 
 test.describe('Org Menu Test', () => {
-    
+    const {email, password} = credentials
     test('show Org Dashboard', async ({ page }: {page: Page}): Promise<void> => {
         const loginPage = new DCLogin(page);
         await loginPage.goto()
-        await loginPage.login(credentials.email, credentials.password)
+        await loginPage.login(email, password)
 
-        const homePage = new DCHome(page)
+        const homePage = new DCHome(loginPage.page)
+        await homePage.page.waitForLoadState('domcontentloaded')
         await homePage.openOrgMenu()
 
         await page.waitForSelector(`[data-org-id="9828"]`, { state: 'visible', timeout: 10000 })

@@ -36,7 +36,6 @@ export class DCHome{
 
     // Open Menu's
     async openOrgMenu() {
-        await this.page.waitForLoadState("domcontentloaded")
         await this.orgMenu.click()
     }
 
