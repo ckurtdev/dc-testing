@@ -6,12 +6,10 @@ export class DCLogin{
     readonly passwordInput: Locator;
     readonly submitButton: Locator;
     readonly forgotPasswordButton: Locator;
-    readonly baseUrl: string;
   
 
-    constructor(page: Page, baseUrl: string) {
+    constructor(page: Page) {
         this.page = page;
-        this.baseUrl = baseUrl;
         this.emailInput = page.getByPlaceholder('E-Mail')
         this.passwordInput = page.getByPlaceholder('Passwort')
         this.submitButton = page.getByRole('button', { name: 'Anmelden' })
@@ -19,7 +17,7 @@ export class DCLogin{
     }
 
     async goto(){
-        await this.page.goto("/Login")
+        await this.page.goto("https://admin.dc.local/Login")
     }
 
 
@@ -32,6 +30,6 @@ export class DCLogin{
     async login(email: string, password: string): Promise<void>{
         await this.emailInput.fill(email);
         await this.passwordInput.fill(password)
-        await this.submitButton.click()
+        await this.submitButton.click();
     }
 }

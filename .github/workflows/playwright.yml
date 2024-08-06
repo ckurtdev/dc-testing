@@ -1,9 +1,8 @@
 name: Playwright Tests
 on:
-  push:
-    branches: [ main, master ]
-  pull_request:
-    branches: [ main, master ]
+  repository_dispatch: 
+    types:
+      - project-a-deployed
 jobs:
   test:
     timeout-minutes: 60

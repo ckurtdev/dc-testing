@@ -1,7 +1,6 @@
 import { test, expect, Locator, Page } from '@playwright/test';
 import { DCLogin } from '../pageObjectModels/dc-login';
 import {DCHome} from '../pageObjectModels/dc-home'
-import baseConfig from '../configs/playwright.config.base';
 
 const credentials = {
     email: 'ckurt@drivers-check.de',
@@ -10,12 +9,12 @@ const credentials = {
 
 test.describe('Admin Monitor Login Tests', () => {
     const {email, password} = credentials
-    console.log(baseConfig.use?.baseURL!)
     test('Login Test', async ({ page }: {page: Page}) => {
-        const loginPage = new DCLogin(page, baseConfig.use?.baseURL!)
+        const loginPage = new DCLogin(page)
         await loginPage.goto()
         loginPage.page.waitForLoadState('domcontentloaded')
         await loginPage.login(email, password)
+        loginPage.page.waitForLoadState('load')
         
         // check if successfull
         const dashboardLocator: Locator =  page.getByRole('heading', { name: ' Dashboard DriversCheck GmbH' }).locator('small')
@@ -29,7 +28,7 @@ test.describe('Admin Monitor Login Tests', () => {
     });
     
     test('Unathorized Test', async ({ page }: {page: Page}) => {
-        await page.goto(baseURL + '/Organisations');
-        await expect(page).toHaveURL('https://admin.drivers-check.de/Login');
+        await page.goto('https://admin.dc.local/Organisations');
+        await expect(page).toHaveURL('https://admin.dc.local/Login');
     });
 });
