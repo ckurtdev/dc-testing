@@ -17,7 +17,11 @@ export class DCLogin{
     }
 
     async goto(){
+<<<<<<< HEAD
         await this.page.goto("https://admin.dc.local/Login")
+=======
+        await this.page.goto("")
+>>>>>>> fde243b77507b43a8e75ee56e95fb25ab72a68fc
     }
 
 
