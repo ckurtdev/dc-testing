@@ -17,7 +17,7 @@ export class DCLogin{
     }
 
     async goto(){
-        await this.page.goto("https://admin.dc.local/Login")
+        await this.page.goto("https://admin.drivers-check.de/")
     }
 
 
