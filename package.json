@@ -2,7 +2,11 @@
   "name": "dc-testing",
   "version": "1.0.0",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "local": "npx playwright test --config=./configs/dc1/playwright.config.dc1.local.ts",
+    "staging": "npx playwright test --config=./configs/dc1/playwright.config.dc1.staging.ts",
+    "production": "npx playwright test --config=./configs/dc1/playwright.config.dc1.production.ts"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",

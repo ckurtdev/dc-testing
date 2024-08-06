@@ -9,8 +9,10 @@ const credentials = {
 
 test.describe('Org Menu Test', () => {
     
-    test('show Org Dashboard', async ({ page }: {page: Page}): Promise<void> => {
-        const loginPage = new DCLogin(page)
+    test('show Org Dashboard', async ({ page }: {page: Page}, testInfo): Promise<void> => {
+        const baseUrl = testInfo.project.use.baseURL;
+        if (!baseUrl) throw new Error("baseURL is not defined in the config");
+        const loginPage = new DCLogin(page, baseUrl);
         await loginPage.goto()
         await loginPage.login(credentials.email, credentials.password)
 

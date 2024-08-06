@@ -5,6 +5,6 @@ export default defineConfig({
   ...baseConfig,
   use: {
     ...baseConfig.use,
-    baseURL: 'https://staging-admin.drivers-check-test.de/Login',
+    baseURL: 'https://staging-admin.drivers-check-test.de',
   },
 });
