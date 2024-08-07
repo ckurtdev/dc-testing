@@ -16,7 +16,9 @@ test.describe('Org Menu Test', () => {
 
         const homePage = new DCHome(loginPage.page)
         await homePage.page.waitForLoadState('domcontentloaded')
-        await expect(homePage.orgMenu).toBeVisible({ timeout: 30000 });
+        await homePage.page.waitForLoadState('networkidle'); // Warte, bis keine Netzwerkanfragen mehr offen sind
+await homePage.page.waitForTimeout(5000); // Warte zusätzlich 5 Sekunden
+await expect(homePage.orgMenu).toBeVisible({ timeout: 30000 });
         await homePage.openOrgMenu()
 
         await page.waitForSelector(`[data-org-id="9828"]`, { state: 'visible', timeout: 10000 })
