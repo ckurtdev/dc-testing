@@ -20,11 +20,7 @@ jobs:
     - name: Install Playwright Browsers
       run: npx playwright install --with-deps
     - name: Run Playwright tests
-<<<<<<< HEAD
       run: npx playwright test --reporter=html
-=======
-      run: npx playwright test --reporter=hmtl
->>>>>>> ba07724dfb2a51a1eb3ddf516b9595d6b8f89952
     - uses: actions/upload-artifact@v4
       if: always()
       with:
