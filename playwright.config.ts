@@ -41,7 +41,7 @@ export default defineConfig({
 
     {
       name: 'firefox',
-      use: { ...devices['Desktop Firefox'], baseURL: "https://admin.drivers-check.de/Login", ignoreHTTPSErrors: true  },
+      use: { ...devices['Desktop Firefox'], baseURL: "https://admin.drivers-check.de/", ignoreHTTPSErrors: true  },
     },
 
     {
