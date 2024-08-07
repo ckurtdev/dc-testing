@@ -27,7 +27,7 @@ test.describe('Admin Monitor Login Tests', () => {
     });
     
     test('Unathorized Test', async ({ page }: {page: Page}) => {
-        await page.goto('https://admin.dc.local/Organisations');
-        await expect(page).toHaveURL('https://admin.dc.local/Login');
+        await page.goto('https://admin.drivers-check.de/Organisations');
+        await expect(page).toHaveURL('https://admin.drivers-check.de/Login');
     });
 });
