@@ -4,7 +4,7 @@ import {DCHome} from '../pageObjectModels/dc-home'
 
 const credentials = {
     email: 'ckurt@drivers-check.de',
-    password: 'Bananarama'
+    password: 'cx%@aARAz$8nUt2m^4BdqHdWaUjZ7J8u6'
 };
 
 test.describe('Admin Monitor Login Tests', () => {
