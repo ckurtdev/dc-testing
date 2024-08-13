@@ -19,7 +19,7 @@ export class DCHome{
 
     constructor(page: Page) {
         this.page = page;
-        this.orgMenu = page.getByTestId('org-selection')
+        this.orgMenu = page.getByTestId('org-selecion')
         this.userMenu = page.getByRole('link', { name: ' Cihan Kurt ' })
         this.newsMenu = page.locator('a', {hasText: "Neuigkeiten"})
         this.moduleMenu = page.locator('a', {hasText: "Führerscheinkontrolle"})
