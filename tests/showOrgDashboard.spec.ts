@@ -4,33 +4,49 @@ import { DCHome } from '../pageObjectModels/dc-home';
 
 const credentials = {
     email: 'ckurt@drivers-check.de',
-    password: 'cx%@aARAz$8nUt2m^4BdqHdWaUjZ7J8u6'
+    password: 'Bananarama123!'
 };
 
 test.describe('Org Menu Test', () => {
     const {email, password} = credentials
-    test('show Org Dashboard', async ({ page }: {page: Page}): Promise<void> => {
-        const loginPage = new DCLogin(page);
-        await loginPage.goto()
-        await loginPage.login(email, password)
+    let page: Page
+    let loginPage: DCLogin
+    let homePage: DCHome
+    let selectedOrg :string
 
-        const homePage = new DCHome(loginPage.page)
-        await homePage.page.waitForLoadState('domcontentloaded')
-        await homePage.page.waitForLoadState('networkidle'); // Warte, bis keine Netzwerkanfragen mehr offen sind
-        await homePage.page.waitForTimeout(5000); // Warte zusätzlich 5 Sekunden
-        await expect(homePage.orgMenu).toBeVisible({ timeout: 30000 });
-await expect(homePage.orgMenu).toBeVisible({ timeout: 30000 });
-await homePage.openOrgMenu();
-        await homePage.openOrgMenu()
+    test.beforeEach(async({browser}) => {
+        page = await browser.newPage();
+        loginPage = new DCLogin(page)
+        homePage = new DCHome(page)
+    })
 
-        await page.waitForSelector(`[data-org-id="9828"]`, { state: 'visible', timeout: 10000 })
-        const listItem = page.locator(`[data-org-id="9828"]`)
-        await expect(listItem).toBeVisible();
-
-        const innerText = await homePage.extractDirectTextFromAnchor(page, "9828")
-        await listItem.click();
-        
-        const orgHeader: Locator = page.getByRole("heading").locator('small').getByText(innerText!);
-        await expect(orgHeader).toBeVisible();
+    test('show Org Dashboard', async (): Promise<void> => {
+        await loginAndOpenMenu()
+        await selectOrg("9828")
+        await verifySuccessfulSelect()
     });
+
+    async function loginAndOpenMenu(){
+        await loginPage.login(email, password)
+        await page.waitForLoadState('domcontentloaded')
+        await verifySuccessfulLogin()
+        await homePage.openOrgMenu()
+        await page.waitForLoadState('networkidle')
+    }
+
+    async function selectOrg(id:string) {
+        const listItem = page.locator(`[data-org-id="${id}"]`)
+        selectedOrg = await homePage.extractDirectTextFromAnchor(page, id, listItem)
+        await listItem.click();
+    }
+
+    async function verifySuccessfulLogin() {
+        const dashboardLocator: Locator = page.getByRole('heading', { name: ' Dashboard DriversCheck GmbH' }).locator('small');
+        await expect(dashboardLocator).toBeVisible();
+    }
+
+    async function verifySuccessfulSelect() {
+        const orgHeader: Locator = page.getByRole("heading").locator('small').getByText(selectedOrg!);
+        await expect(orgHeader).toBeVisible();
+    }
 });

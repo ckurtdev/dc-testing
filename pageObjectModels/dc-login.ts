@@ -1,4 +1,4 @@
-import {expect, type Locator, type Page} from '@playwright/test';
+import { type Locator, type Page} from '@playwright/test';
 
 export class DCLogin{
     readonly page: Page;
@@ -16,18 +16,18 @@ export class DCLogin{
         this.forgotPasswordButton = page.locator('a', {hasText: "Passwort vergessen?"})
     }
 
-    async goto(){
-        await this.page.goto("https://admin.drivers-check.de/Login")
+    async goto(): Promise<void>{
+        await this.page.goto("https://admin.dc.local/")
     }
-
-
+    
     // open Pages
     async gotoForgotPassword(): Promise<void> {
         await this.forgotPasswordButton.click()
     }
-
+    
     // actions
     async login(email: string, password: string): Promise<void>{
+        await this.goto();
         await this.emailInput.fill(email);
         await this.passwordInput.fill(password)
         await this.submitButton.click();

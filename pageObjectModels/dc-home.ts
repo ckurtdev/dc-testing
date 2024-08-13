@@ -1,4 +1,4 @@
-import {expect, type Locator, type Page} from '@playwright/test';
+import { type Locator, type Page} from '@playwright/test';
 
 export class DCHome{
     readonly page: Page;
@@ -19,7 +19,7 @@ export class DCHome{
 
     constructor(page: Page) {
         this.page = page;
-        this.orgMenu = page.getByTestId('org-selecion')
+        this.orgMenu = page.getByTestId('org-selection')
         this.userMenu = page.getByRole('link', { name: ' Cihan Kurt ' })
         this.newsMenu = page.locator('a', {hasText: "Neuigkeiten"})
         this.moduleMenu = page.locator('a', {hasText: "Führerscheinkontrolle"})
@@ -35,41 +35,43 @@ export class DCHome{
     }
 
     // Open Menu's
-    async openOrgMenu() {
+    async openOrgMenu(): Promise<void> {
         await this.orgMenu.click()
     }
 
-    async openUserMenu() {
+    async openUserMenu(): Promise<void> {
         await this.userMenu.click()
     }
 
-    async openEmplyoeeMenu(){
+    async openEmplyoeeMenu(): Promise<void>{
         await this.employeeMenu.click()
     }
 
-    async openReportingMenu(){
+    async openReportingMenu(): Promise<void>{
         await this.reportingMenu.click()
     }
 
-    async openAdministrationMenu(){
+    async openAdministrationMenu(): Promise<void>{
         await this.administrationMenu.click()
     }
 
-    // open Pages
-    async gotoOrgSearch() {
+    async gotoOrgSearch(): Promise<void> {
         await this.openOrgMenu()
         this.page.locator('a', {hasText: "Organisation suchen"})
     }
 
-    async logOut(){
+    // For Sidenav
+    async navigateTo(sideNavOption: string): Promise<void> {
+        await this.page.getByRole('link', { name: sideNavOption }).click();
+    }
+
+    async logOut(): Promise<void>{
         await this.openUserMenu()
         await this.page.getByRole('link', { name: ' Abmelden' }).click();
     }
 
     // actions
-    async  extractDirectTextFromAnchor(page: Page, orgId: string) {
-        const listItem = page.locator(`[data-org-id="${orgId}"]`);
-        
+    async  extractDirectTextFromAnchor(page: Page, orgId: string, listItem: Locator): Promise<string> {
         const directText = await listItem.evaluate((element) => {
           const anchor = element.querySelector('a');
           if (!anchor) return null;
