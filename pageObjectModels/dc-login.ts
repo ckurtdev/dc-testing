@@ -17,7 +17,7 @@ export class DCLogin{
     }
 
     async goto(): Promise<void>{
-        await this.page.goto("https://admin.dc.local/")
+        await this.page.goto("https://admin.drivers-check.local/")
     }
     
     // open Pages
